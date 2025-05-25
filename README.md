@@ -1,76 +1,58 @@
-# **E-Commerce API**
+# FastAPI CRUD Boilerplate
 
-A production-ready RESTful API for a simple e-commerce platform. This project leverages **FastAPI** for API development, supports testing with **pytest**, and uses **Docker** for containerized deployment including a PostgreSQL database.
+A production-ready FastAPI boilerplate with async SQLAlchemy, Pydantic v2, and Docker. This template provides a solid foundation for building scalable RESTful APIs with best practices in mind.
 
----
+## Features
 
-## **Getting Started**
+- **FastAPI** for high-performance API development
+- **Async SQLAlchemy 2.0** with PostgreSQL support
+- **Pydantic v2** for data validation
+- **Docker** and **Docker Compose** ready
+- **Unit & Integration Tests** with pytest
+- **Testing** with pytest-asyncio
+
+## Quick Start
 
 ### Prerequisites
-- Docker installed on your machine.
-- uv with Python 3.10+ (optional for local development).
 
----
+- Docker and Docker Compose
+- Python 3.10+
+- UV package manager (recommended)
 
-### **Running the Application**
+### Running with Docker (Recommended)
 
-#### **Using Docker Compose**
-1. Build and start the services:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ahdhani/boilerplate.git
+   cd boilerplate
+   ```
+
+2. Copy and configure environment variables:
+   ```bash
+   cp .env.example .env
+   # Edit .env as needed
+   ```
+
+3. Start the services:
    ```bash
    docker-compose up --build app
    ```
 
-2. Access the backend application:
-   - API-DOCS: [Swagger](http://localhost:8000/docs)
-   - Health Check: [http://localhost:8000/health](http://localhost:8000/health)
+4. Access the application:
+   - API Docs: http://localhost:8000/docs
+   - Health Check: http://localhost:8000/health
 
-#### **Running Locally**
-1. Install dependencies:
-   ```bash
-   uv sync
-   ```
 
-2. Do migrations if needed:
-   ```bash
-   uv run alembic upgrade head
-   ```
+## Running Tests
 
-3. Run the application:
-   ```bash
-   uv run fastapi run app/main.py --host 0.0.0.0 --port 8000
-   ```
+Run tests using Docker:
+```bash
+docker-compose up pytest
+```
 
----
+## Acknowledgments
 
-### **Running Tests**
-
-#### **With Docker**
-1. Run the test container:
-   ```bash
-   docker-compose up pytest
-   ```
-
-#### **Locally**
-1. Install test dependencies:
-   ```bash
-   uv sync
-   ```
-
-2. Run the tests:
-   ```bash
-   uv run pytest -vvv
-   ```
-
----
-
-## **Endpoints**
-
-| Method | Endpoint        | Description           |
-|--------|-----------------|-----------------------|
-| GET    | `/products`     | Retrieve all products |
-| POST   | `/products`     | Add a new product     |
-| GET    | `/orders`       | Retrieve all orders   |
-| POST   | `/orders`       | Place an order        |
-| GET    | `/health`       | Health check endpoint |
-
----
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [SQLAlchemy](https://www.sqlalchemy.org/)
+- [Pydantic](https://pydantic-docs.helpmanual.io/)
