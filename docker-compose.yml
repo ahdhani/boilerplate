@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+
+  db:
+    container_name: postgress_db
+    image: postgres
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+
+  base:
+    container_name: base
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+
+  app:
+    extends: base
+    container_name: boilerplate
+    ports:
+      - 8000:8000
+    restart: always
+    depends_on:
+      - db
+    command: bash -c "uv run fastapi run app/main.py --host 0.0.0.0 --port 8000"
+
+  pytest:
+    extends: base
+    container_name: pytest
+    environment:
+      - DB_ASYNC_URL=sqlite+aiosqlite:///./test.db
+    command: bash -c "uv run pytest -vvv"
+
+
+volumes:
+  postgres_data:
+    driver: local

@@ -1,0 +1,22 @@
+[project]
+name = "boilerplate"
+version = "0.1.0"
+description = "Boilerplate platform"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aiosqlite>=0.20.0",
+    "asyncpg>=0.30.0",
+    "fastapi[standard]>=0.115.6",
+    "orjson>=3.10.15",
+    "pydantic>=2.10.5",
+    "pydantic-settings>=2.7.1",
+    "pytest-asyncio>=0.26.0",
+    "sqlalchemy>=2.0.37",
+]
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

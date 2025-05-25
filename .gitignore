@@ -1,0 +1,7 @@
+/.venv/
+/.python-version
+
+.idea
+
+*.db
+__pycache__
